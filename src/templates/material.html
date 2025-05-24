@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LSTM Predictions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <style>
+        /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+        .row.content {height: 1500px}
+
+        /* Set gray background color and 100% height */
+
+        /* Set black background color, white text and some padding */
+        footer {
+          background-color: #555;
+          color: white;
+          padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+          .sidenav {
+            height: auto;
+            padding: 15px;
+          }
+          .row.content {height: auto;}
+        }
+      </style>
+</head>
+<body>
+    <div class="container-fluid">
+      <div class="row content">
+        <div class="col-sm-2" style="background-color: #3E215D">
+            <div class="container-fluid sticky-top">
+                <br>
+                <a class="navbar-brand">
+                    <img src="../static/tes.svg" class="mx-auto d-block img-fluid">
+                </a>
+                <br>
+                <br>
+                <br>
+                <ul class="nav nav-fill">
+                  <li class="nav-item">
+                    <a class="nav-link text-start text-light" aria-current="page" href="{{ url_for('views.home') }}">Home</a>
+                  </li>
+                </ul>
+                <ul class="nav nav-pills nav-fill">
+                  <li class="nav-item">
+                    <a class="nav-link text-start text-light" aria-current="page" href="#scrollspy1">{{ material_desc_1 }}</a>
+                  </li>
+                </ul>
+                <ul class="nav nav-pills nav-fill">
+                  <li class="nav-item">
+                    <a class="nav-link text-start text-light" aria-current="page" href="#scrollspy2">{{ material_desc_2 }}</a>
+                  </li>
+                </ul>
+                <ul class="nav nav-pills nav-fill">
+                  <li class="nav-item">
+                    <a class="nav-link text-start text-light" aria-current="page" href="#scrollspy3">{{ material_desc_3 }}</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary py-2 py-lg-4 sticky-top">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                      </form>
+                    </div>
+                </div>
+            </nav>
+            <div class="row-gap-2">
+                <div data-bs-spy="scroll" data-bs-target="target" data-bs-smooth-scroll="true" class="scrollspy-example">
+                    <div class="card my-2" id="scrollspy1">
+                        <div class="card-header">{{ material_desc_1 }}</div>
+                        <div class="container-fluid">
+                            <div id='chart1' class='chart'></div>
+                            <h6>Summary :</h6>
+                            <ul>
+                                <li>Grafik diatas merupakan gambar dari prediksi {{ material_desc_1 }}, dari grafik tersebut dapat dilihat jumlah penjualan menjelang akhir bulan terjadi peningkatan secara fluktuatif.</li>
+                                <li>Terjadi pola di awal bulan jumlah penjualan sedikit lalu diakhir bulan terjadi peningkatan.</li>
+                                <li>Dari hasil prediksi dapat dilihat bahwa pada bulan juni akan terjadi penurunan secara fluktuatif.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card my-2" id="scrollspy2">
+                        <div class="card-header">{{ material_desc_2 }}</div>
+                        <div class="container-fluid">
+                            <div id='chart2' class='chart'></div>
+                            <h6>Summary :</h6>
+                            <ul>
+                                <li>Grafik diatas merupakan gambar dari prediksi {{ material_desc_2 }}, dari grafik tersebut dapat dilihat jumlah penjualan pertengahan hingga akhir bulan terjadi peningkatan jumlah penjualan.</li>
+                                <li>Selama 5 bulan tersebut jumlah penjualan tertinggi terjadi pada bulan mei</li>
+                                <li>Dari hasil prediksi dapat dilihat bahwa pada bulan juni akan terjadi penurunan secara fluktuatif.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card my-2" id="scrollspy3">
+                        <div class="card-header">{{ material_desc_3 }}</div>
+                        <div class="container-fluid">
+                            <div id='chart3' class='chart'></div>
+                            <h6>Summary :</h6>
+                            <ul>
+                                <li>Grafik diatas merupakan gambar dari prediksi {{ material_desc_3 }}, dari grafik tersebut dapat dilihat terjadi fluktasi jumlah penjualan dengan trend meningkat pada bulan februari hingga maret.</li>
+                                <li>Pada 2 bulan terakhir terjadi pola di awal bulan jumlah penjualan sedikit lalu diakhir bulan terjadi peningkatan yang signifikan dibanding awal bulan</li>
+                                <li>Dari hasil prediksi dapat dilihat bahwa pada bulan juni akan terjadi penurunan di awal bulan hingga tengah bulan.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+</body>
+    <script type='text/javascript'>
+        var graphs1 = {{graphJSON1 | safe}};
+        var graphs2 = {{graphJSON2 | safe}};
+        var graphs3 = {{graphJSON3 | safe}};
+        Plotly.plot('chart1',graphs1,{});
+        Plotly.plot('chart2',graphs2,{});
+        Plotly.plot('chart3',graphs3,{});
+    </script>
+</html>

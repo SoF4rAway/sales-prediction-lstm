@@ -1,0 +1,21 @@
+name: sales-pred
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - ipykernel # Install ipykernel with conda
+  - pip
+  - python-dotenv
+  - pip:
+      - numpy
+      - pandas
+      - scikit-learn
+      - matplotlib
+      - seaborn
+      - plotly
+      - keras
+      - tensorflow
+      - flask
+      - requests
+      - json
